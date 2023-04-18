@@ -44,6 +44,7 @@
           joindomain: ad.griffinperry.io
           domainadmin: "{{ domain_admin }}"
           domainadminpassword: "{{ domain_password }}"
+          password: "{{ template_password }}"
           hostname: "{{ vm_hostname }}"
       delegate_to: localhost
       register: deploy
