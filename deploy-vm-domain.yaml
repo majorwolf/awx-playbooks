@@ -16,6 +16,7 @@
         name: "{{ vm_hostname }}"
         state: poweredon
         template: "{{ host_template }}"
+        cutomization_spec: "{{ host_template }}"
         disk:
         - size_gb: "{{ host_disk_size }}"
           type: "{{ host_disk_type }}"
@@ -35,7 +36,5 @@
         - name: "{{ host_network }}"
           connected: True
         wait_for_ip_address: no
-        customization:
-          cutomization_spec: "{{ host_template }}"
       delegate_to: localhost
       register: deploy
