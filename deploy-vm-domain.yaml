@@ -35,14 +35,14 @@
         - name: "{{ host_network }}"
           connected: True
         wait_for_ip_address: no
-      customization:
-        autologon: true
-        dns_servers:
-        - 10.100.0.3
-        - 10.100.0.1
-        joindomain: ad.griffinperry.io
-        domainadmin: "{{ domain_admin }}"
-        domainadminpassword: "{{ domain_password }}"
-        hostname: "{{ vm_hostname }}"
+        customization:
+          autologon: true
+          dns_servers:
+          - 10.100.0.3
+          - 10.100.0.1
+          joindomain: ad.griffinperry.io
+          domainadmin: "{{ domain_admin }}"
+          domainadminpassword: "{{ domain_password }}"
+          hostname: "{{ vm_hostname }}"
       delegate_to: localhost
       register: deploy
