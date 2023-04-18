@@ -35,6 +35,7 @@
           version: 14 # Hardware version of virtual machine
         networks:
         - name: "{{ host_network }}"
+          connected: True
         wait_for_ip_address: no
       delegate_to: localhost
       register: deploy
