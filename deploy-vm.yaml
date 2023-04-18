@@ -26,7 +26,7 @@
           memory_mb: "{{ host_memory }}"
           num_cpus: "{{ host_cpus }}"
           num_cpu_cores_per_socket: "{{ host_cpus }}"
-          scsi: paravirtual
+          scsi: lsilogicsas
           memory_reservation_lock: False
           mem_reservation: 2048
           hotadd_cpu: True
