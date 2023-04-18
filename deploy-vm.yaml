@@ -9,12 +9,11 @@
       vmware_guest:
         hostname: "{{ vcsa_hostname }}"
         username: "{{ vcsa_username }}"
-        esxi_hostname: "{{ esxi_hostname }}"
         password: "{{ pwd }}"
         datacenter: WolfLabs
         validate_certs: no
         folder: "{{ vcsa_folder }}"
-        name: "{{ host_hostname }}"
+        name: "{{ vm_hostname }}"
         state: poweredon
         template: "{{ host_template }}"
         disk:
@@ -26,7 +25,7 @@
         hardware:
           memory_mb: "{{ host_memory }}"
           num_cpus: "{{ host_cpus }}"
-          num_cpu_cores_per_socket: "{{ host_cores }}"
+          num_cpu_cores_per_socket: "{{ host_cpus }}"
           scsi: paravirtual
           memory_reservation_lock: False
           mem_reservation: 2048
