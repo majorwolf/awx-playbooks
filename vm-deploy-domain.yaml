@@ -1,0 +1,48 @@
+---
+- name: AWX Deploy VM OS Host with Domain Join
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+
+    - name: Create a virtual machine from a template
+      vmware_guest:
+        hostname: "{{ vcsa_hostname }}"
+        username: "{{ vcsa_username }}"
+        password: "{{ pwd }}"
+        datacenter: WolfLabs
+        validate_certs: no
+        folder: "{{ vcsa_folder }}"
+        name: "{{ vm_hostname }}"
+        state: poweredon
+        template: "{{ host_template }}"
+        disk:
+        - size_gb: "{{ host_disk_size }}"
+          type: "{{ host_disk_type }}"
+          datastore: "{{ esxi_datastore }}"
+        hardware:
+          memory_mb: "{{ host_memory }}"
+          num_cpus: "{{ host_cpus }}"
+          num_cpu_cores_per_socket: "{{ host_cpus }}"
+          scsi: lsilogicsas
+          memory_reservation_lock: False
+          mem_reservation: 2048
+          hotadd_cpu: True
+          hotremove_cpu: True
+          hotadd_memory: True
+          version: 14 # Hardware version of virtual machine
+        networks:
+        - name: "{{ host_network }}"
+          connected: True
+        wait_for_ip_address: no
+      customization:
+        autologon: true
+        dns_servers:
+        - 10.100.0.3
+        - 10.100.0.1
+        joindomain: ad.griffinperry.io
+        domainadmin: "{{ domain_admin }}"
+        domainadminpassword: "{{ domain_password }}"
+        hostname: "{{ vm_hostname }}"
+      delegate_to: localhost
+      register: deploy
