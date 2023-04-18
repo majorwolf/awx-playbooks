@@ -16,7 +16,7 @@
         name: "{{ vm_hostname }}"
         state: poweredon
         template: "{{ host_template }}"
-        cutomization_spec: "{{ host_template }}"
+        customization_spec: "{{ host_template }}"
         disk:
         - size_gb: "{{ host_disk_size }}"
           type: "{{ host_disk_type }}"
