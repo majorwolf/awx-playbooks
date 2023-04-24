@@ -4,7 +4,6 @@
   connection: local
   gather_facts: no
   tasks:
-
     - name: Create a virtual machine from a template
       vmware_guest:
         hostname: "{{ vcsa_hostname }}"
@@ -36,6 +35,17 @@
         networks:
         - name: "{{ host_network }}"
           connected: True
-        wait_for_ip_address: no
+        wait_for_ip_address: yes
+    - name: Add tags to a virtual machine
+      community.vmware.vmware_tag_manager:
+        hostname: "{{ vcsa_hostname }}"
+        username: "{{ vcsa_username }}"
+        password: "{{ pwd }}"
+        tag_names:
+          - Virtual Machines:Provisioning
+        object_name: "{{ vm_hostname }}"
+        object_type: VirtualMachine
+        state: add
+      
       delegate_to: localhost
       register: deploy
